@@ -1,1 +1,2 @@
-# spave_invader_test
+# space_invaders_test
+Test task. Space Invaders's game clone
