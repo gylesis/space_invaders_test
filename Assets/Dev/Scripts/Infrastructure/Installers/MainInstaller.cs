@@ -1,4 +1,5 @@
 ﻿using Dev.PlayerLogic;
+using Dev.ScoreLogic;
 using Dev.UI;
 using UnityEngine;
 using Zenject;
@@ -10,9 +11,13 @@ namespace Dev.Infrastructure
         [SerializeField] private Player _player;
         [SerializeField] private CameraService _cameraService;
         [SerializeField] private MenuService _menuService;
+
+        [SerializeField] private ScoreView _scoreView;
         
         public override void InstallBindings()
         {
+            Container.Bind<ScoreService>().AsSingle().WithArguments(_scoreView);
+            
             Container.Bind<MenuService>().FromInstance(_menuService).AsSingle();
             
             Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle().NonLazy();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UniRx;
+using UnityEngine;
 using Zenject;
 
 namespace Dev.PlayerLogic
@@ -9,7 +10,8 @@ namespace Dev.PlayerLogic
         [SerializeField] protected WeaponCustomTag _weaponTag;
        
         protected WeaponStaticDataContainer _weaponStaticDataContainer;
-
+        public Subject<AmmoDieContext> AmmoDied { get; } = new Subject<AmmoDieContext>();
+        
         [Inject]
         private void Construct(WeaponStaticDataContainer weaponStaticDataContainer)
         {

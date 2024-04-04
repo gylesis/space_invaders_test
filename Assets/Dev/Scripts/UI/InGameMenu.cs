@@ -1,5 +1,4 @@
-﻿using System;
-using Dev.PauseLogic;
+﻿using Dev.PauseLogic;
 using Dev.UI;
 using UniRx;
 using UnityEngine;

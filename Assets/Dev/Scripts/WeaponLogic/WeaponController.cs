@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace Dev.PlayerLogic
@@ -15,6 +16,15 @@ namespace Dev.PlayerLogic
         private void Start()
         {
             SelectWeapon(0);
+
+            foreach (var weapon in _weapons)
+            {
+                weapon.AmmoDied.TakeUntilDestroy(this).Subscribe((context => OnAmmoDied(context, weapon)));
+            }
+        }
+
+        protected virtual void OnAmmoDied(AmmoDieContext ammoDieContext, Weapon weapon)
+        {
         }
 
         public void SelectWeapon(int index)
@@ -27,10 +37,10 @@ namespace Dev.PlayerLogic
 
             _selectedWeapon = _weapons[index];
         }
-        
+
         public void Shoot(Vector2 direction)
-        {           
-            if (_selectedWeapon == null)    
+        {
+            if (_selectedWeapon == null)
             {
                 Debug.LogError($"Weapon not selected", gameObject);
                 return;

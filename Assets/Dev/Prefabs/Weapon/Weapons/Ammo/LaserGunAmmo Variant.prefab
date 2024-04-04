@@ -185,6 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aed0bfa7f1b44aab142878e104d240b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _view: {fileID: 920256828827787749}
   _tagContainer: {fileID: 5660915844756854228}
   _triggerZone: {fileID: 9021193943300151391}
   _obstacleLayers:

@@ -1,0 +1,40 @@
+﻿using System;
+using UniRx;
+using UnityEngine;
+
+namespace Dev
+{
+    public class Health : MonoBehaviour
+    {
+        [SerializeField] private int _maxHealth;
+
+        private int _currentHealth;
+
+        public Subject<Unit> ZeroHealth { get; } = new Subject<Unit>();
+        public Subject<int> Changed { get; } = new Subject<int>();
+            
+        private void Awake()
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        private void Start()
+        {
+            Changed.OnNext(_currentHealth);
+        }
+
+        public void TakeDamage(int damage)
+        {
+            _currentHealth -= damage;
+
+            if (_currentHealth <= 0)
+            {
+                _currentHealth = 0;
+                ZeroHealth.OnNext(Unit.Default);
+            }
+            
+            Changed.OnNext(_currentHealth);
+        }
+        
+    }
+}

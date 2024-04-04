@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 
 namespace Dev.PlayerLogic
@@ -10,12 +11,19 @@ namespace Dev.PlayerLogic
         
         protected void RegisterAmmo(ProjectileWeaponAmmo projectileWeaponAmmo)
         {
-            projectileWeaponAmmo.ToDie.TakeUntilDestroy(projectileWeaponAmmo).Subscribe((unit => OnAmmoToDie(projectileWeaponAmmo)));
+            projectileWeaponAmmo.ToDie.TakeUntilDestroy(projectileWeaponAmmo).Subscribe(OnAmmoToDie);
         }
         
-        protected void OnAmmoToDie(ProjectileWeaponAmmo projectileWeaponAmmo)
+        protected void OnAmmoToDie(AmmoDieContext dieContext)
         {
-            Destroy(projectileWeaponAmmo.gameObject);
+            dieContext.Ammo.View.gameObject.SetActive(false);
+            
+            Observable.Timer(TimeSpan.FromTicks(2)).Subscribe((l =>
+            {
+                Destroy(dieContext.Ammo.gameObject);
+            }));
+            
+            AmmoDied.OnNext(dieContext);
             
             AllowToShoot = true;
         }

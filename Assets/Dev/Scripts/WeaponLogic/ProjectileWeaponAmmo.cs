@@ -1,4 +1,5 @@
-﻿using Dev.Levels.Interactions;
+﻿using System;
+using Dev.Levels.Interactions;
 using Dev.PauseLogic;
 using Dev.Utils;
 using UniRx;
@@ -14,7 +15,12 @@ namespace Dev.PlayerLogic
         private ProjectileAmmoSetupContext _setupContext;
         private bool _isGamePaused;
 
-        public Subject<Unit> ToDie { get; } = new Subject<Unit>();
+        public Subject<AmmoDieContext> ToDie { get; } = new Subject<AmmoDieContext>();
+
+        private void Start()
+        {
+            PauseService.Instance.RegisterListener(this);
+        }
 
         public void Setup(ProjectileAmmoSetupContext setupContext)
         {
@@ -29,9 +35,16 @@ namespace Dev.PlayerLogic
 
         private void OnProjectileTriggered(Collider2D collider)
         {
+            if(_isGamePaused) return;
+            
             if (_obstacleLayers.Contains(collider.gameObject.layer))
             {
-                ToDie.OnNext(Unit.Default);
+                AmmoDieContext ammoDieContext = new AmmoDieContext();
+                ammoDieContext.Target = collider.gameObject;
+                ammoDieContext.Ammo = this;
+                
+                ToDie.OnNext(ammoDieContext);
+                PauseService.Instance.RemoveListener(this);
             }
         }
 
