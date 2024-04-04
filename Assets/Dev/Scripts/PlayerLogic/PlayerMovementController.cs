@@ -1,16 +1,18 @@
-﻿using Dev.StaticData;
+﻿using Dev.PauseLogic;
+using Dev.StaticData;
 using UnityEngine;
 using Zenject;
 
 namespace Dev.PlayerLogic
 {
-    public class PlayerMovementController : ITickable, IInitializable
+    public class PlayerMovementController : ITickable, IInitializable, IPauseListener
     {
         private Player _player;
         private InputProvider _inputProvider;
         private GameConfig _gameConfig;
         private CameraService _cameraService;
-        private Vector2 _clampPos;
+        
+        private bool _isGamePaused;
 
         public PlayerMovementController(Player player, InputProvider inputProvider, GameConfig gameConfig, CameraService cameraService)
         {
@@ -22,22 +24,13 @@ namespace Dev.PlayerLogic
 
         public void Initialize()
         {
-            var leftBorder = new Vector2(0, 0);
-            var rightBorder = new Vector2(Screen.width, 0);
-
-            Vector3 rightWorldBorder = _cameraService.Camera.ScreenToWorldPoint(rightBorder);
-            Vector3 leftWorldBorder = _cameraService.Camera.ScreenToWorldPoint(leftBorder);
-
-            float offset = (_gameConfig.WorldStaticData.BorderXPercentOffset / 100) * Screen.width;
-
-            float max = rightWorldBorder.x - offset;
-            float min = leftWorldBorder.x;
-
-            _clampPos = new Vector2(min, max);
+            PauseService.Instance.RegisterListener(this);
         }
 
         public void Tick()
         {
+            if(_isGamePaused) return;
+            
             float moveX = _inputProvider.MoveVector.x;
             float moveY = _inputProvider.MoveVector.y;
 
@@ -99,6 +92,11 @@ namespace Dev.PlayerLogic
             
             // Apply
             _player.transform.position = playerPos;
+        }
+
+        public void OnPause(bool isGamePaused)
+        {
+            _isGamePaused = isGamePaused;
         }
     }
 }

@@ -1,16 +1,18 @@
 ﻿using Dev.Levels.Interactions;
+using Dev.PauseLogic;
 using Dev.Utils;
 using UniRx;
 using UnityEngine;
 
 namespace Dev.PlayerLogic
 {
-    public abstract class ProjectileWeaponAmmo : WeaponAmmo
+    public abstract class ProjectileWeaponAmmo : WeaponAmmo, IPauseListener
     {
         [SerializeField] private TriggerZone _triggerZone;
         [SerializeField] private LayerMask _obstacleLayers;
         
         private ProjectileAmmoSetupContext _setupContext;
+        private bool _isGamePaused;
 
         public Subject<Unit> ToDie { get; } = new Subject<Unit>();
 
@@ -35,8 +37,14 @@ namespace Dev.PlayerLogic
 
         private void FixedUpdate()
         {
+            if(_isGamePaused) return;
+            
             transform.position += _setupContext.Direction * (Time.deltaTime * _setupContext.Speed);
         }
 
+        public void OnPause(bool isGamePaused)
+        {
+            _isGamePaused = isGamePaused;
+        }
     }
 }

@@ -189,7 +189,7 @@ MonoBehaviour:
   _triggerZone: {fileID: 9021193943300151391}
   _obstacleLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
 --- !u!114 &5660915844756854228 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 946083897067256925, guid: 7db39ec0054b05f4c8fecef1d4d94ba6, type: 3}
