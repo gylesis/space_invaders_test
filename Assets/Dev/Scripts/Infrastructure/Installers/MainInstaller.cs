@@ -13,7 +13,7 @@ namespace Dev.Infrastructure
         
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<PlayerMovementController>().AsSingle().NonLazy();
 
             Container.Bind<CameraService>().FromInstance(_cameraService).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();

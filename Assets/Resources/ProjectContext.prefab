@@ -75,3 +75,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameConfig: {fileID: 11400000, guid: 511d7711ded84554890ae65f1191b97b, type: 2}
+  _weaponStaticDataContainer: {fileID: 11400000, guid: 81b28da97383b724592efb5356020bf6, type: 2}

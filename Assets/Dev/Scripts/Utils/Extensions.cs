@@ -14,6 +14,11 @@ namespace Dev.Utils
     {
         private static Dictionary<int, Sequence> Sequences = new Dictionary<int, Sequence>();
 
+        public static bool Contains(this LayerMask mask, int layer)
+        {
+            return mask == (mask | (1 << layer));
+        }
+        
         public static async Task<object> InvokeAsync(this MethodInfo @this, object obj, params object[] parameters)
         {
             Task task = (Task)@this.Invoke(obj, parameters);

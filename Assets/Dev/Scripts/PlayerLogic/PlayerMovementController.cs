@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Dev.PlayerLogic
 {
-    public class PlayerController : ITickable, IInitializable
+    public class PlayerMovementController : ITickable, IInitializable
     {
         private Player _player;
         private InputProvider _inputProvider;
@@ -12,7 +12,7 @@ namespace Dev.PlayerLogic
         private CameraService _cameraService;
         private Vector2 _clampPos;
 
-        public PlayerController(Player player, InputProvider inputProvider, GameConfig gameConfig, CameraService cameraService)
+        public PlayerMovementController(Player player, InputProvider inputProvider, GameConfig gameConfig, CameraService cameraService)
         {
             _cameraService = cameraService;
             _gameConfig = gameConfig;
