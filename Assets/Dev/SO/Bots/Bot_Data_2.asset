@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _botPrefab: {fileID: 8716345492542117963, guid: 95381374d28033149a78bbfca4b825a7, type: 3}
   _reward: 100
+  _tag: {fileID: 11400000, guid: 3809f186f5052a04ca4e810207fb2497, type: 2}

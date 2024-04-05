@@ -1,12 +1,17 @@
 ﻿using Dev.PlayerLogic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Dev.BotLogic
 {
     public class Bot : MonoBehaviour
     {
         [SerializeField] private BotWeaponController _weaponController;
+
+        [FormerlySerializedAs("_tag")] [SerializeField] private BotTag botTag;
+
+        public BotTag BotTag => botTag;
 
         public BotWeaponController WeaponController => _weaponController;
 

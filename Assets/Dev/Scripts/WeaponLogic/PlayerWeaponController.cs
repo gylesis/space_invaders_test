@@ -1,5 +1,6 @@
 ﻿using Dev.BotLogic;
 using Dev.ScoreLogic;
+using Dev.StaticData;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -10,10 +11,12 @@ namespace Dev.PlayerLogic
     {
         private InputProvider _inputProvider;
         private ScoreService _scoreService;
+        private GameConfig _gameConfig;
 
         [Inject]
-        private void Construct(InputProvider inputProvider, ScoreService scoreService)
+        private void Construct(InputProvider inputProvider, ScoreService scoreService, GameConfig gameConfig)
         {
+            _gameConfig = gameConfig;
             _scoreService = scoreService;
             _inputProvider = inputProvider;
         }
@@ -26,7 +29,12 @@ namespace Dev.PlayerLogic
             
             if (isBot)
             {
-                _scoreService.AddScore(100);
+                bool getData = _gameConfig.BotConfig.TryGetData(bot.BotTag, out var staticData);
+
+                if (getData)
+                {
+                    _scoreService.AddScore(staticData.Reward);
+                }
 
                 bot.ToDie.OnNext(Unit.Default);
             }

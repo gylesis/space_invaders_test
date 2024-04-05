@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Dev.PlayerLogic;
 using UnityEngine;
 
 namespace Dev.StaticData
@@ -9,5 +10,21 @@ namespace Dev.StaticData
         [SerializeField] private List<BotStaticData> _botsData;
 
         public List<BotStaticData> BotsData => _botsData;
+
+        public bool TryGetData(BotTag tag, out BotStaticData botStaticData)
+        {
+            foreach (var data in _botsData)
+            {
+                if (data.Tag.AreTagMatch(tag))
+                {
+                    botStaticData = data;
+                    return true;
+                }
+                
+            }
+
+            botStaticData = null;
+            return false;
+        }
     }
 }
