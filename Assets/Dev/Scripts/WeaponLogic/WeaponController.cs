@@ -8,10 +8,14 @@ namespace Dev.WeaponLogic
     {
         [SerializeField] private List<Weapon> _weapons;
 
+        protected abstract bool IsPlayer { get; }
+        
         private Weapon _selectedWeapon;
 
         public int WeaponCount => _weapons.Count;
 
+        public bool AllowToShoot => _selectedWeapon.AllowToShoot;
+        
         private void Start()
         {
             SelectWeapon(0);
@@ -19,6 +23,7 @@ namespace Dev.WeaponLogic
             foreach (var weapon in _weapons)
             {
                 weapon.AmmoDied.TakeUntilDestroy(this).Subscribe((context => OnAmmoDied(context, weapon)));
+                weapon.Setup(IsPlayer);
             }
         }
 

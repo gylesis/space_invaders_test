@@ -1,4 +1,6 @@
-﻿using Dev.PauseLogic;
+﻿using Dev.BotLogic;
+using Dev.PauseLogic;
+using Dev.PlayerLogic;
 using Dev.Utils;
 using UniRx;
 using UnityEngine;
@@ -40,15 +42,43 @@ namespace Dev.WeaponLogic
         {
             if (_isGamePaused) return;
 
-            if (_obstacleLayers.Contains(collider.gameObject.layer))
-            {
-                AmmoDieContext ammoDieContext = new AmmoDieContext();
-                ammoDieContext.Target = collider.gameObject;
-                ammoDieContext.Ammo = this;
+            bool isObstacle = _obstacleLayers.Contains(collider.gameObject.layer);
 
-                ToDie.OnNext(ammoDieContext);
-                PauseService.Instance.RemoveListener(this);
+            if (_setupContext.IsOwnerPlayer)
+            {
+                bool isBot = collider.TryGetComponent<Bot>(out var bot);
+
+                if (isBot)
+                {
+                    Die(collider.gameObject);
+                    return;
+                }
             }
+            else
+            {
+                bool isPlayer = collider.TryGetComponent<Player>(out var player);
+
+                if (isPlayer)
+                {
+                    Die(collider.gameObject); 
+                    return;
+                }
+            }
+                
+            if (isObstacle)
+            {
+                Die(collider.gameObject); 
+            }
+        }
+
+        private void Die(GameObject target)
+        {   
+            AmmoDieContext ammoDieContext = new AmmoDieContext();
+            ammoDieContext.Target = target;
+            ammoDieContext.Ammo = this;
+
+            ToDie.OnNext(ammoDieContext);
+            PauseService.Instance.RemoveListener(this);
         }
 
         private void FixedUpdate()

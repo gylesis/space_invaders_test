@@ -148,6 +148,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bot2 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1856670012597947803, guid: 39be9ff4f3538514199842257637dbca, type: 3}
+      propertyPath: _weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1856670012597947803, guid: 39be9ff4f3538514199842257637dbca, type: 3}
+      propertyPath: _weapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 2113234768296399925}
     - target: {fileID: 2758723912546516482, guid: 39be9ff4f3538514199842257637dbca, type: 3}
       propertyPath: m_Layer
       value: 7
@@ -189,12 +197,24 @@ PrefabInstance:
     - {fileID: 3704749453069483722, guid: 39be9ff4f3538514199842257637dbca, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3499729366586373940, guid: 39be9ff4f3538514199842257637dbca, type: 3}
+    - {fileID: 2943502948279855907, guid: 39be9ff4f3538514199842257637dbca, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7852874745333148295, guid: 39be9ff4f3538514199842257637dbca, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3116605331034707436}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39be9ff4f3538514199842257637dbca, type: 3}
+--- !u!114 &2113234768296399925 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4439342575279990070, guid: 39be9ff4f3538514199842257637dbca, type: 3}
+  m_PrefabInstance: {fileID: 2362139509817815299}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f184af95439446eca1d499be9ba158a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5490735287072775044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7852874745333148295, guid: 39be9ff4f3538514199842257637dbca, type: 3}

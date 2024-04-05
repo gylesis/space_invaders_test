@@ -10,10 +10,13 @@ namespace Dev.WeaponLogic
 {
     public class PlayerWeaponController : WeaponController, IPauseListener
     {
+        protected override bool IsPlayer => true;
+        
         private InputProvider _inputProvider;
         private ScoreService _scoreService;
         private GameConfig _gameConfig;
         private bool _isGamePaused;
+
 
         [Inject]
         private void Construct(InputProvider inputProvider, ScoreService scoreService, GameConfig gameConfig)

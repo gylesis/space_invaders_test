@@ -10,12 +10,18 @@ namespace Dev.WeaponLogic
         [SerializeField] protected WeaponCustomTag _weaponTag;
 
         protected WeaponStaticDataContainer _weaponStaticDataContainer;
+        protected bool _isOwnerPlayer;
         public Subject<AmmoDieContext> AmmoDied { get; } = new Subject<AmmoDieContext>();
 
         [Inject]
         private void Construct(WeaponStaticDataContainer weaponStaticDataContainer)
         {
             _weaponStaticDataContainer = weaponStaticDataContainer;
+        }
+
+        public void Setup(bool isOwnerPlayer)
+        {
+            _isOwnerPlayer = isOwnerPlayer;
         }
 
         public Vector3 ShootPos => _shootPoint.position;

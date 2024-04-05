@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b71a68cc5be247b39b271aeb2724b7ca, type: 3}
+  m_Name: ShotgunStaticData
+  m_EditorClassIdentifier: 
+  _tag: {fileID: 11400000, guid: 23743cfde7bef1946948b18698eb7e17, type: 2}
+  _speed: 12
+  _projectileWeaponAmmo: {fileID: -1874329126555911507, guid: c03d2d4168e5a044893fb254dcbed9d0, type: 3}
+  _bulletsOffset: 0.4
+  _bulletsAmount: 3

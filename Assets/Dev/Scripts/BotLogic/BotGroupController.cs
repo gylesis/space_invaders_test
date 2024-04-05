@@ -130,10 +130,17 @@ namespace Dev.BotLogic
         {
             int botsAmountToShoot = Random.Range(1, 4);
 
-            for (int i = 0; i < botsAmountToShoot; i++)
+            for (int i = 0; i < botsAmountToShoot; ++i)
             {
                 Bot bot = _bots[Random.Range(0, _bots.Count)];
 
+                if (bot.WeaponController.AllowToShoot == false)
+                {
+                    i--;
+                    continue;
+                }
+                
+                
                 Observable.Timer(TimeSpan.FromSeconds(Random.Range(0f, 0.3f))).Subscribe((l =>
                 {
                     bot.WeaponController.SelectWeapon(Random.Range(0, bot.WeaponController.WeaponCount));

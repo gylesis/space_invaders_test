@@ -7,5 +7,6 @@ namespace Dev.WeaponLogic
         public Vector3 StartPos;
         public Vector3 Direction;
         public float Speed;
+        public bool IsOwnerPlayer;
     }
 }

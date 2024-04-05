@@ -13,20 +13,21 @@ namespace Dev.WeaponLogic
 
             AllowToShoot = false;
 
-            ProjectileWeaponAmmo projectileWeaponAmmo = Instantiate(_ammoPrefab, ShootPos, Quaternion.Euler(direction));
-
-            bool tryGetData = _weaponStaticDataContainer.TryGetData(_weaponTag, out WeaponStaticData staticData);
+            bool tryGetData = _weaponStaticDataContainer.TryGetData(_weaponTag, out LaserGunStaticData staticData);
 
             if (tryGetData == false)
-            {
+            {   
                 Debug.LogError("No data found about this weapon", gameObject);
                 return false;
             }
 
+            ProjectileWeaponAmmo projectileWeaponAmmo = Instantiate(staticData.ProjectileWeaponAmmo, ShootPos, Quaternion.Euler(direction));
+            
             var setupContext = new ProjectileAmmoSetupContext();
-            setupContext.Speed = _projectileSpeed;
+            setupContext.Speed = staticData.Speed;
             setupContext.StartPos = ShootPos;
             setupContext.Direction = direction;
+            setupContext.IsOwnerPlayer = _isOwnerPlayer;
 
             projectileWeaponAmmo.Setup(setupContext);
 

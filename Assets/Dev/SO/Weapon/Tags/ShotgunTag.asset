@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ccd98386ca4dcfbac666217966d877, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: fff4cc2cabf24b99b35427d0c1f6f579, type: 3}
+  m_Name: ShotgunTag
   m_EditorClassIdentifier: 
-  _xSpeedModifier: 6
-  _ySpeedModifier: 6

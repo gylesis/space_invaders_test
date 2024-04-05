@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: LaserGunStaticData
   m_EditorClassIdentifier: 
   _tag: {fileID: 11400000, guid: f640ad2de922f6d47b42b77c963fc1ac, type: 2}
-  _projectileWeaponAmmo: {fileID: 0}
+  _speed: 12
+  _projectileWeaponAmmo: {fileID: 424755227533469134, guid: e590f4c5047405c42bb82c758bd7d672, type: 3}

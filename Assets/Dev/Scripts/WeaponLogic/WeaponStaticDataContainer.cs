@@ -11,13 +11,13 @@ namespace Dev.WeaponLogic
 
         public List<WeaponStaticData> StaticDatas => _staticDatas;
 
-        public bool TryGetData(WeaponCustomTag tag, out WeaponStaticData weaponStaticData)
+        public bool TryGetData<TDataType>(WeaponCustomTag tag, out TDataType weaponStaticData) where TDataType : WeaponStaticData
         {
             foreach (WeaponStaticData data in _staticDatas)
             {
                 if (data.Tag.AreTagMatch(tag))
                 {
-                    weaponStaticData = data;
+                    weaponStaticData = data as TDataType;
                     return true;
                 }
             }

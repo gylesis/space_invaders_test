@@ -1,4 +1,5 @@
 ﻿using Dev.Infrastructure;
+using Dev.PlayerLogic;
 using Zenject;
 
 namespace Dev.UI
@@ -6,7 +7,6 @@ namespace Dev.UI
     public class MainMenu : Menu
     {
         private GameStateService _gameStateService;
-
         protected override void Awake()
         {
             OnSucceedButtonClicked((() =>
