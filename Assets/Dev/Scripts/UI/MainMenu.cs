@@ -1,7 +1,7 @@
 ﻿using Dev.Infrastructure;
 using Zenject;
 
-namespace Dev.Scripts.UI.PopUpsAndMenus
+namespace Dev.UI
 {
     public class MainMenu : Menu
     {
@@ -12,7 +12,7 @@ namespace Dev.Scripts.UI.PopUpsAndMenus
             OnSucceedButtonClicked((() =>
             {
                 MenuService.HideMenu<MainMenu>();
-                
+
                 _gameStateService.StartGame();
             }));
         }
@@ -22,6 +22,5 @@ namespace Dev.Scripts.UI.PopUpsAndMenus
         {
             _gameStateService = gameStateService;
         }
-        
     }
 }

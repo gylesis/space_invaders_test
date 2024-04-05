@@ -10,10 +10,10 @@ namespace Dev
         private int _currentHealth;
 
         public int CurrentHealth => _currentHealth;
-        
+
         public Subject<Unit> ZeroHealth { get; } = new Subject<Unit>();
         public Subject<int> Changed { get; } = new Subject<int>();
-            
+
         private void Awake()
         {
             ResetHealth();
@@ -39,9 +39,8 @@ namespace Dev
                 _currentHealth = 0;
                 ZeroHealth.OnNext(Unit.Default);
             }
-            
+
             Changed.OnNext(_currentHealth);
         }
-        
     }
 }

@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     [CreateAssetMenu(menuName = "StaticData/LaserGunStaticData", fileName = "LaserGunStaticData", order = 0)]
-    public class LaserGunStaticData : ProjectileWeaponStaticData
-    {
-        
-    }
+    public class LaserGunStaticData : ProjectileWeaponStaticData { }
 }

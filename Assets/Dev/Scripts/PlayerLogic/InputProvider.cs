@@ -10,10 +10,12 @@ namespace Dev.PlayerLogic
         public bool ToShoot => _inputMap.Movement.Shoot.WasPerformedThisFrame();
         public bool ToPause => _inputMap.Movement.Pause.WasPerformedThisFrame();
 
-        public Vector2 MoveVector => _simulatedMoveInput.sqrMagnitude > 0 ? _simulatedMoveInput : _inputMap.Movement.Move.ReadValue<Vector2>();
+        public Vector2 MoveVector => _simulatedMoveInput.sqrMagnitude > 0
+            ? _simulatedMoveInput
+            : _inputMap.Movement.Move.ReadValue<Vector2>();
 
         private Vector2 _simulatedMoveInput;
-        
+
         public InputProvider()
         {
             _inputMap = new InputMap();
@@ -25,9 +27,6 @@ namespace Dev.PlayerLogic
             _simulatedMoveInput = input;
         }
 
-        public void Tick()
-        {
-            
-        }
+        public void Tick() { }
     }
 }

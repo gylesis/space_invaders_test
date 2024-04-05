@@ -24,7 +24,7 @@ namespace Dev.Infrastructure
 
             Changed.OnNext(typeof(TState).ToString());
 
-//            Debug.Log($"Changed state to {state.GetType()}");
+            //            Debug.Log($"Changed state to {state.GetType()}");
 
             _current = state;
 

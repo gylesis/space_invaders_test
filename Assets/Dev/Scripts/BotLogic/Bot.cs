@@ -1,4 +1,6 @@
 ﻿using Dev.PlayerLogic;
+using Dev.Utils;
+using Dev.WeaponLogic;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -9,7 +11,8 @@ namespace Dev.BotLogic
     {
         [SerializeField] private BotWeaponController _weaponController;
 
-        [FormerlySerializedAs("_tag")] [SerializeField] private BotTag botTag;
+        [FormerlySerializedAs("_tag")] [SerializeField]
+        private BotTag botTag;
 
         public BotTag BotTag => botTag;
 
@@ -18,7 +21,7 @@ namespace Dev.BotLogic
         public BotMovementController MovementController;
 
         public Subject<BotDieReason> ToDie { get; } = new Subject<BotDieReason>();
-        
+
         private void Awake()
         {
             MovementController = new BotMovementController(this);

@@ -1,16 +1,15 @@
 ﻿using Dev.Infrastructure;
 using Dev.PauseLogic;
-using Dev.UI;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Dev.Scripts.UI.PopUpsAndMenus
+namespace Dev.UI
 {
     public class PauseMenu : Menu
     {
         [SerializeField] private DefaultReactiveButton _restartButton;
-        
+
         private GameStateService _gameStateService;
 
         protected override void Awake()
@@ -26,22 +25,21 @@ namespace Dev.Scripts.UI.PopUpsAndMenus
         {
             _gameStateService = gameStateService;
         }
-        
+
         private void OnRestartButtonClicked()
         {
             MenuService.HideMenu<PauseMenu>();
             MenuService.ShowMenu<InGameMenu>();
-            
+
             _gameStateService.RestartGame();
         }
 
         private void OnPauseButtonClicked()
         {
             PauseService.Instance.SetPause(false);
-            
+
             MenuService.HideMenu<PauseMenu>();
             MenuService.ShowMenu<InGameMenu>();
         }
-        
     }
 }

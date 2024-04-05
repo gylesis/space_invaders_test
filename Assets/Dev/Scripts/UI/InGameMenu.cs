@@ -1,18 +1,14 @@
 ﻿using Dev.PauseLogic;
-using Dev.UI;
 using UniRx;
 using UnityEngine;
 
-namespace Dev.Scripts.UI.PopUpsAndMenus
+namespace Dev.UI
 {
     public class InGameMenu : Menu
     {
         [SerializeField] private DefaultReactiveButton _pauseButton;
 
-        protected override void Awake()
-        {
-            
-        }
+        protected override void Awake() { }
 
         private void Start()
         {

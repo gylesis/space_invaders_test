@@ -1,16 +1,17 @@
 ﻿using Dev.PauseLogic;
 using Dev.PlayerLogic;
 using Dev.StaticData;
+using Dev.WeaponLogic;
 using UnityEngine;
 using Zenject;
 
-namespace Dev.Infrastructure
+namespace Dev.Infrastructure.Installers
 {
     public class SpaceInvadersProjectContext : MonoInstaller
     {
         [SerializeField] private GameConfig _gameConfig;
         [SerializeField] private WeaponStaticDataContainer _weaponStaticDataContainer;
-        
+
         public override void InstallBindings()
         {
             Container.BindInterfacesAndSelfTo<InputProvider>().AsSingle().NonLazy();

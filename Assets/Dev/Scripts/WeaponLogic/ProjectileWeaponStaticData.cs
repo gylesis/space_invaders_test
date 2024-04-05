@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     public abstract class ProjectileWeaponStaticData : WeaponStaticData
     {

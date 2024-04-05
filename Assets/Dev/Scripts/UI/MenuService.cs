@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Dev.Scripts.UI.PopUpsAndMenus;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,7 +11,7 @@ namespace Dev.UI
         [SerializeField] private Transform _menusParent;
 
         private Dictionary<Type, Menu> _spawnedPrefabs = new Dictionary<Type, Menu>();
-    
+
         private void Awake()
         {
             AddPopUps(_menusParent.GetComponentsInChildren<Menu>());
@@ -21,10 +20,10 @@ namespace Dev.UI
         public void AddPopUps(Menu[] menus)
         {
             foreach (Menu menu in menus)
-            {   
+            {
                 menu.InitPopUpService(this);
                 Type type = menu.GetType();
-    
+
                 _spawnedPrefabs.Add(type, menu);
             }
         }

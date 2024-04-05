@@ -1,10 +1,8 @@
-﻿using UnityEngine;
+﻿using Dev.Utils;
+using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     [CreateAssetMenu(menuName = "Tags/WeaponCustomTag", fileName = "WeaponCustomTag", order = 0)]
-    public class WeaponCustomTag : CustomTag
-    {
-        
-    }
+    public class WeaponCustomTag : CustomTag { }
 }

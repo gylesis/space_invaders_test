@@ -1,5 +1,4 @@
-﻿
-namespace Dev.ScoreLogic
+﻿namespace Dev.ScoreLogic
 {
     public class ScoreService
     {
@@ -13,7 +12,7 @@ namespace Dev.ScoreLogic
         {
             _scoreView = scoreView;
         }
-        
+
         public void AddScore(int scoreAmount)
         {
             _score += scoreAmount;

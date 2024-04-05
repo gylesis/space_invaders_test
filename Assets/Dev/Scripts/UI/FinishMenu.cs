@@ -3,13 +3,13 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace Dev.Scripts.UI.PopUpsAndMenus
+namespace Dev.UI
 {
     public class FinishMenu : Menu
     {
         [SerializeField] private TMP_Text _title;
         [SerializeField] private TMP_Text _scoreText;
-        
+
         private ScoreService _scoreService;
 
         [Inject]
@@ -17,11 +17,11 @@ namespace Dev.Scripts.UI.PopUpsAndMenus
         {
             _scoreService = scoreService;
         }
-        
+
         public void Setup(bool isLosed)
         {
             string titleText;
-            
+
             if (isLosed)
             {
                 titleText = $"You lost, try your luck again!";
@@ -34,6 +34,5 @@ namespace Dev.Scripts.UI.PopUpsAndMenus
             _title.text = titleText;
             _scoreText.text = $"You scored {_scoreService.Score}!";
         }
-        
     }
 }

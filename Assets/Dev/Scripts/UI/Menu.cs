@@ -1,16 +1,16 @@
 ﻿using System;
-using Dev.UI;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
 
-namespace Dev.Scripts.UI.PopUpsAndMenus
+namespace Dev.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
     public abstract class Menu : MonoBehaviour
     {
-        [Header("Sets if pop up or menus is root UI screen")]
-        [SerializeField] private bool _isRoot;
+        [Header("Sets if pop up or menus is root UI screen")] [SerializeField]
+        private bool _isRoot;
+
         [SerializeField] protected CanvasGroup _canvasGroup;
         [SerializeField] protected DefaultReactiveButton _procceedButton;
 

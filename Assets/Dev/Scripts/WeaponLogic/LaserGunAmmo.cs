@@ -1,7 +1,4 @@
-﻿namespace Dev.PlayerLogic
+﻿namespace Dev.WeaponLogic
 {
-    public class LaserGunAmmo : ProjectileWeaponAmmo
-    {
-        
-    }
+    public class LaserGunAmmo : ProjectileWeaponAmmo { }
 }

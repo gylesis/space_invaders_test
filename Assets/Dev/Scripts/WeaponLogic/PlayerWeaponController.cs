@@ -1,12 +1,12 @@
-﻿using System;
-using Dev.BotLogic;
+﻿using Dev.BotLogic;
 using Dev.PauseLogic;
+using Dev.PlayerLogic;
 using Dev.ScoreLogic;
 using Dev.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     public class PlayerWeaponController : WeaponController, IPauseListener
     {
@@ -38,7 +38,7 @@ namespace Dev.PlayerLogic
             base.OnAmmoDied(ammoDieContext, weapon);
 
             bool isBot = ammoDieContext.Target.TryGetComponent<Bot>(out var bot);
-            
+
             if (isBot)
             {
                 bool getData = _gameConfig.BotConfig.TryGetData(bot.BotTag, out var staticData);
@@ -54,8 +54,8 @@ namespace Dev.PlayerLogic
 
         private void Update()
         {
-            if(_isGamePaused) return;
-            
+            if (_isGamePaused) return;
+
             if (_inputProvider.ToShoot)
             {
                 Shoot(Vector2.up);

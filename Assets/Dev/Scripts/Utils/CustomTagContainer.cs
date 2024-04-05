@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.Utils
 {
     public class CustomTagContainer : MonoBehaviour
     {

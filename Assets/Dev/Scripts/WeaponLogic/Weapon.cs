@@ -2,26 +2,26 @@
 using UnityEngine;
 using Zenject;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     public abstract class Weapon : MonoBehaviour
     {
         [SerializeField] protected Transform _shootPoint;
         [SerializeField] protected WeaponCustomTag _weaponTag;
-       
+
         protected WeaponStaticDataContainer _weaponStaticDataContainer;
         public Subject<AmmoDieContext> AmmoDied { get; } = new Subject<AmmoDieContext>();
-        
+
         [Inject]
         private void Construct(WeaponStaticDataContainer weaponStaticDataContainer)
         {
             _weaponStaticDataContainer = weaponStaticDataContainer;
         }
-        
+
         public Vector3 ShootPos => _shootPoint.position;
 
         public bool AllowToShoot { get; protected set; } = true;
-        
+
         public abstract bool TryShoot(Vector2 direction);
     }
-}   
+}

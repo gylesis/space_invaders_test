@@ -11,18 +11,16 @@ namespace Dev.BotLogic
         {
             _diContainer = diContainer;
         }
-        
+
         public Bot Create(BotSpawnContext param)
         {
-            return _diContainer.InstantiatePrefabForComponent<Bot>(param.Prefab.gameObject, param.SpawnPos, Quaternion.identity,param.Parent);
+            return _diContainer.InstantiatePrefabForComponent<Bot>(param.Prefab.gameObject, param.SpawnPos,
+                Quaternion.identity, param.Parent);
         }
     }
 
-    public class BotFactory : PlaceholderFactory<BotSpawnContext, Bot>
-    {
-        
-    }
-    
+    public class BotFactory : PlaceholderFactory<BotSpawnContext, Bot> { }
+
     public class BotSpawnContext
     {
         public Bot Prefab;

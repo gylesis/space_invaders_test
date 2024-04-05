@@ -1,7 +1,4 @@
-﻿namespace Dev.PlayerLogic
+﻿namespace Dev.WeaponLogic
 {
-    public abstract class HitscanWeapon : Weapon
-    {
-        
-    }
+    public abstract class HitscanWeapon : Weapon { }
 }

@@ -1,15 +1,14 @@
-﻿using Dev.PlayerLogic;
-using TMPro;
+﻿using TMPro;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-namespace Dev
+namespace Dev.PlayerLogic
 {
     public class PlayerHealthView : MonoBehaviour
     {
         [SerializeField] private TMP_Text _healthText;
-        
+
         private Player _player;
 
         [Inject]
@@ -17,11 +16,11 @@ namespace Dev
         {
             _player = player;
         }
-    
+
         private void Start()
         {
             _player.Health.Changed.TakeUntilDestroy(this).Subscribe((OnHealthChanged));
-            
+
             OnHealthChanged(_player.Health.CurrentHealth);
         }
 

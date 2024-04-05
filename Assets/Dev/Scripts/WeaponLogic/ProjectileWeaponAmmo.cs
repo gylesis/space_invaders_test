@@ -1,17 +1,15 @@
-﻿using System;
-using Dev.Levels.Interactions;
-using Dev.PauseLogic;
+﻿using Dev.PauseLogic;
 using Dev.Utils;
 using UniRx;
 using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     public abstract class ProjectileWeaponAmmo : WeaponAmmo, IPauseListener
     {
         [SerializeField] private TriggerZone _triggerZone;
         [SerializeField] private LayerMask _obstacleLayers;
-        
+
         private ProjectileAmmoSetupContext _setupContext;
         private bool _isGamePaused;
 
@@ -40,14 +38,14 @@ namespace Dev.PlayerLogic
 
         private void OnProjectileTriggered(Collider2D collider)
         {
-            if(_isGamePaused) return;
-            
+            if (_isGamePaused) return;
+
             if (_obstacleLayers.Contains(collider.gameObject.layer))
             {
                 AmmoDieContext ammoDieContext = new AmmoDieContext();
                 ammoDieContext.Target = collider.gameObject;
                 ammoDieContext.Ammo = this;
-                
+
                 ToDie.OnNext(ammoDieContext);
                 PauseService.Instance.RemoveListener(this);
             }
@@ -55,8 +53,8 @@ namespace Dev.PlayerLogic
 
         private void FixedUpdate()
         {
-            if(_isGamePaused) return;
-            
+            if (_isGamePaused) return;
+
             transform.position += _setupContext.Direction * (Time.deltaTime * _setupContext.Speed);
         }
 

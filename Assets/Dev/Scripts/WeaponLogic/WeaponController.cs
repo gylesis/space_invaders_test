@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
     public abstract class WeaponController : MonoBehaviour
     {
@@ -23,9 +22,7 @@ namespace Dev.PlayerLogic
             }
         }
 
-        protected virtual void OnAmmoDied(AmmoDieContext ammoDieContext, Weapon weapon)
-        {
-        }
+        protected virtual void OnAmmoDied(AmmoDieContext ammoDieContext, Weapon weapon) { }
 
         public void SelectWeapon(int index)
         {

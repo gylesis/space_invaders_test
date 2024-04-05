@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.WeaponLogic
 {
-    [CreateAssetMenu(menuName = "StaticData/WeaponStaticDataContainer", fileName = "WeaponStaticDataContainer", order = 0)]
+    [CreateAssetMenu(menuName = "StaticData/WeaponStaticDataContainer", fileName = "WeaponStaticDataContainer",
+        order = 0)]
     public class WeaponStaticDataContainer : ScriptableObject
     {
         [SerializeField] private List<WeaponStaticData> _staticDatas;
@@ -11,7 +12,7 @@ namespace Dev.PlayerLogic
         public List<WeaponStaticData> StaticDatas => _staticDatas;
 
         public bool TryGetData(WeaponCustomTag tag, out WeaponStaticData weaponStaticData)
-        {       
+        {
             foreach (WeaponStaticData data in _staticDatas)
             {
                 if (data.Tag.AreTagMatch(tag))

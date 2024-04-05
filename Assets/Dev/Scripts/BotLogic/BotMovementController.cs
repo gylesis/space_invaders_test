@@ -17,9 +17,6 @@ namespace Dev.BotLogic
             _bot.transform.position += (Vector3)direction * moveStep;
         }
 
-        public void Tick()
-        {
-            
-        }
+        public void Tick() { }
     }
 }

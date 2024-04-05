@@ -18,7 +18,7 @@ namespace Dev.Utils
         {
             return mask == (mask | (1 << layer));
         }
-        
+
         public static async Task<object> InvokeAsync(this MethodInfo @this, object obj, params object[] parameters)
         {
             Task task = (Task)@this.Invoke(obj, parameters);
@@ -141,7 +141,7 @@ namespace Dev.Utils
             /// <param name="onMoveComplete"></param>
             /// <param name="onMoveUpdate"> 0 to 1</param>
             public static void MoveParabolic(Transform transform, Vector3 targetPos, float duration, float height = 3f,
-                Action onMoveComplete = null, Action<float> onMoveUpdate = null)
+                                             Action onMoveComplete = null, Action<float> onMoveUpdate = null)
             {
                 Vector3 startPos = transform.position;
 
@@ -155,7 +155,7 @@ namespace Dev.Utils
             }
 
             public static void MoveParabolic(Transform transform, Transform target, float duration, float height = 3f,
-                Action onMoveComplete = null, Action<float> onMoveUpdate = null)
+                                             Action onMoveComplete = null, Action<float> onMoveUpdate = null)
             {
                 Vector3 startPos = transform.position;
 

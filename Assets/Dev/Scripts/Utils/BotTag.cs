@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Dev.PlayerLogic
+namespace Dev.Utils
 {
     [CreateAssetMenu(menuName = "Tags/BotTag", fileName = "BotTag", order = 0)]
-    public class BotTag : CustomTag
-    {
-        
-    }
+    public class BotTag : CustomTag { }
 }

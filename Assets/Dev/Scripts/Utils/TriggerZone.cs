@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-namespace Dev.Levels.Interactions
+namespace Dev.Utils
 {
     [RequireComponent(typeof(Collider2D))]
     public class TriggerZone : MonoBehaviour

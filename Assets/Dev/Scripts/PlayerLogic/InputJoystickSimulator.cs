@@ -7,7 +7,7 @@ namespace Dev.PlayerLogic
     public class InputJoystickSimulator : MonoBehaviour
     {
         [SerializeField] private Joystick _joystick;
-        
+
         private InputProvider _inputProvider;
 
         [Inject]
@@ -34,10 +34,10 @@ namespace Dev.PlayerLogic
         private void Update()
         {
             Vector2 input = new Vector2(_joystick.Horizontal, _joystick.Vertical);
-            
-            if(input.sqrMagnitude == 0) return;
-            
-            _inputProvider.SimulateMoveInput(input);    
+
+            if (input.sqrMagnitude == 0) return;
+
+            _inputProvider.SimulateMoveInput(input);
         }
     }
 }

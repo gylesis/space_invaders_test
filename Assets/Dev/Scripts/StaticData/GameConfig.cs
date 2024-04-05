@@ -7,7 +7,7 @@ namespace Dev.StaticData
     {
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private BotConfig _botConfig;
-        
+
         [SerializeField] private WorldStaticData _worldStaticData;
 
         public BotConfig BotConfig => _botConfig;
