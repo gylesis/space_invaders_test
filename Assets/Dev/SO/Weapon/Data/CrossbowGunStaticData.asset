@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d0aa83821cb4239a7d8313d5a71210f, type: 3}
+  m_Name: CrossbowGunStaticData
+  m_EditorClassIdentifier: 
+  _tag: {fileID: 11400000, guid: 75feb076ed5546f4385908bf4b538584, type: 2}
+  _speed: 8
+  _projectileWeaponAmmo: {fileID: 1362040837085776638, guid: 62ab24d82beb6444b9ea32eb488e76ce, type: 3}

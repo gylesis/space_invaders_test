@@ -1,6 +1,5 @@
 ﻿using System;
 using UniRx;
-using UnityEngine;
 
 namespace Dev.WeaponLogic
 {
@@ -9,6 +8,7 @@ namespace Dev.WeaponLogic
         protected void RegisterAmmo(ProjectileWeaponAmmo projectileWeaponAmmo)
         {
             projectileWeaponAmmo.ToDie.TakeUntilDestroy(projectileWeaponAmmo).Subscribe(OnAmmoToDie);
+            AmmoSpawned.OnNext(projectileWeaponAmmo);
         }
 
         protected void OnAmmoToDie(AmmoDieContext dieContext)
@@ -22,4 +22,5 @@ namespace Dev.WeaponLogic
             AllowToShoot = true;
         }
     }
+    
 }

@@ -17,7 +17,6 @@ namespace Dev.WeaponLogic
         private GameConfig _gameConfig;
         private bool _isGamePaused;
 
-
         [Inject]
         private void Construct(InputProvider inputProvider, ScoreService scoreService, GameConfig gameConfig)
         {

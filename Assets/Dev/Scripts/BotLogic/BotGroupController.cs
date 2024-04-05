@@ -63,15 +63,19 @@ namespace Dev.BotLogic
             _botsSpawner = botsSpawner;
         }
 
-        public void StopControlling()
+        public void ResetSettings()
         {
+            _moveDifficultyModifier = 1;
+            _moveTimer = 0;
+            _moveDirection = Vector2.left;
+            _currentStepsMoved = 0;
             _shootDisposable?.Clear();
             _compositeDisposable?.Clear();
         }
 
         public void SetupBots()
         {
-            StopControlling();
+            ResetSettings();
 
             foreach (var bot in _botsSpawner.SpawnedBots)
             {
@@ -97,7 +101,8 @@ namespace Dev.BotLogic
                 .Interval(TimeSpan.FromSeconds(_shootCooldown))
                 .Where((l => _isGamePaused == false))
                 .TakeUntilDestroy(this)
-                .Subscribe((l => { TrySomeoneToShoot(); })).AddTo(_compositeDisposable);
+                .Subscribe((l => { TrySomeoneToShoot(); }))
+                .AddTo(_compositeDisposable);
         }
 
         public void RegisterBot(Bot bot)

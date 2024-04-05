@@ -8,6 +8,8 @@ namespace Dev.WeaponLogic
 
         protected override void OnAmmoDied(AmmoDieContext ammoDieContext, Weapon weapon)
         {
+            base.OnAmmoDied(ammoDieContext, weapon);
+
             bool isPlayer = ammoDieContext.Target.TryGetComponent<Player>(out var player);
 
             if (isPlayer)

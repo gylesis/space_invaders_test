@@ -5,6 +5,7 @@ using Dev.PauseLogic;
 using Dev.PlayerLogic;
 using Dev.ScoreLogic;
 using Dev.UI;
+using Dev.WeaponLogic;
 using UniRx;
 using Zenject;
 
@@ -19,10 +20,12 @@ namespace Dev.Infrastructure
         private MenuService _menuService;
 
         private CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        private AmmoWatcher _ammoWatcher;
 
         public GameStateService(ScoreService scoreService, BotsSpawner botsSpawner, PlayerService playerService,
-                                BotGroupController botGroupController, MenuService menuService)
+                                BotGroupController botGroupController, MenuService menuService, AmmoWatcher ammoWatcher)
         {
+            _ammoWatcher = ammoWatcher;
             _menuService = menuService;
             _botGroupController = botGroupController;
             _playerService = playerService;
@@ -48,7 +51,7 @@ namespace Dev.Infrastructure
 
         private void OnGameFinish(bool isLost)
         {
-            _botGroupController.StopControlling();
+            _botGroupController.ResetSettings();
             _playerService.SetForbidInput(true);
 
             PauseService.Instance.SetPause(true);
@@ -78,7 +81,10 @@ namespace Dev.Infrastructure
         public void ResetGame()
         {
             PauseService.Instance.SetPause(false);
+         
+            _ammoWatcher.DestroyAllAmmos();
             _playerService.SetForbidInput(true);
+            _playerService.ReloadWeapon();
             _botsSpawner.UnSpawnAllBots();
             _scoreService.ResetScore();
         }

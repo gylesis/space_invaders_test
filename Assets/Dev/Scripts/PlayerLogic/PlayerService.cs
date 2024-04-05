@@ -31,6 +31,11 @@ namespace Dev.PlayerLogic
             _playerMovementController.IsInputDisabled = isInputDisabled;
         }
 
+        public void ReloadWeapon()
+        {
+            _player.PlayerWeaponController.Reload();
+        }
+        
         public void RestoreHealth()
         {
             _player.Health.ResetHealth();

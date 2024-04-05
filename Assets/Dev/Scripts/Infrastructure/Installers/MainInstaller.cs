@@ -2,6 +2,7 @@
 using Dev.PlayerLogic;
 using Dev.ScoreLogic;
 using Dev.UI;
+using Dev.WeaponLogic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -32,6 +33,8 @@ namespace Dev.Infrastructure.Installers
             Container.Bind<BotsSpawner>().FromInstance(_botsSpawner).AsSingle();
             Container.Bind<ScoreService>().AsSingle().WithArguments(_scoreView);
 
+            Container.Bind<AmmoWatcher>().AsSingle().NonLazy();
+            
             Container.Bind<MenuService>().FromInstance(_menuService).AsSingle();
             Container.Bind<PlayerService>().FromInstance(playerService).AsSingle();
             Container.Bind<BotGroupController>().FromInstance(_botGroupController).AsSingle();

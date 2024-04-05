@@ -373,6 +373,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6992102625824804965}
     m_Modifications:
+    - target: {fileID: 4849151038656176188, guid: cb5322448394d344b9542676368dae83, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.82
+      objectReference: {fileID: 0}
     - target: {fileID: 6193006161240350220, guid: cb5322448394d344b9542676368dae83, type: 3}
       propertyPath: m_Name
       value: Shotgun Variant
@@ -446,6 +450,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6992102625824804965}
     m_Modifications:
+    - target: {fileID: 4786697039199180159, guid: 14a7b3b7494b8cd459f3236d3503ff29, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.81
+      objectReference: {fileID: 0}
     - target: {fileID: 5765888322528744588, guid: 14a7b3b7494b8cd459f3236d3503ff29, type: 3}
       propertyPath: _ammoPrefab
       value: 

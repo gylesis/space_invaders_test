@@ -1,5 +1,4 @@
 ﻿using Dev.Infrastructure;
-using Dev.PlayerLogic;
 using Zenject;
 
 namespace Dev.UI

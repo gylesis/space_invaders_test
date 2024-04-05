@@ -1,8 +1,10 @@
-﻿using Dev.BotLogic;
+﻿using System;
+using Dev.BotLogic;
 using Dev.PauseLogic;
 using Dev.PlayerLogic;
 using Dev.Utils;
 using UniRx;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Dev.WeaponLogic
@@ -12,7 +14,7 @@ namespace Dev.WeaponLogic
         [SerializeField] private TriggerZone _triggerZone;
         [SerializeField] private LayerMask _obstacleLayers;
 
-        private ProjectileAmmoSetupContext _setupContext;
+        protected ProjectileAmmoSetupContext _setupContext;
         private bool _isGamePaused;
 
         public Subject<AmmoDieContext> ToDie { get; } = new Subject<AmmoDieContext>();
@@ -30,6 +32,8 @@ namespace Dev.WeaponLogic
         public void Setup(ProjectileAmmoSetupContext setupContext)
         {
             _setupContext = setupContext;
+
+            transform.up = setupContext.Direction;
             transform.position = _setupContext.StartPos;
         }
 
@@ -85,6 +89,11 @@ namespace Dev.WeaponLogic
         {
             if (_isGamePaused) return;
 
+            Move();
+        }
+
+        protected virtual void Move()
+        {
             transform.position += _setupContext.Direction * (Time.deltaTime * _setupContext.Speed);
         }
 
