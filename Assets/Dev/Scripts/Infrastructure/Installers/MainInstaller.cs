@@ -1,4 +1,5 @@
-﻿using Dev.PlayerLogic;
+﻿using Dev.BotLogic;
+using Dev.PlayerLogic;
 using Dev.ScoreLogic;
 using Dev.UI;
 using UnityEngine;
@@ -12,10 +13,15 @@ namespace Dev.Infrastructure
         [SerializeField] private CameraService _cameraService;
         [SerializeField] private MenuService _menuService;
 
+        [SerializeField] private BotsSpawner _botsSpawner;
+        
         [SerializeField] private ScoreView _scoreView;
         
         public override void InstallBindings()
         {
+            Container.BindFactory<BotSpawnContext, Bot, BotFactory>().FromFactory<BotIFactory>();
+
+            Container.Bind<BotsSpawner>().FromInstance(_botsSpawner).AsSingle();
             Container.Bind<ScoreService>().AsSingle().WithArguments(_scoreView);
             
             Container.Bind<MenuService>().FromInstance(_menuService).AsSingle();

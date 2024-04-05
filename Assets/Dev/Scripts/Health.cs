@@ -1,5 +1,4 @@
-﻿using System;
-using UniRx;
+﻿using UniRx;
 using UnityEngine;
 
 namespace Dev
@@ -10,6 +9,8 @@ namespace Dev
 
         private int _currentHealth;
 
+        public int CurrentHealth => _currentHealth;
+        
         public Subject<Unit> ZeroHealth { get; } = new Subject<Unit>();
         public Subject<int> Changed { get; } = new Subject<int>();
             

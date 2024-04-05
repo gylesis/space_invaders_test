@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: GameConfig
   m_EditorClassIdentifier: 
   _playerConfig: {fileID: 11400000, guid: ea9e6c6e87ca81147bcd6af2fdc1d3ad, type: 2}
+  _botConfig: {fileID: 11400000, guid: cd08a1f50d5b0eb4f9e830f45910e7d7, type: 2}
   _worldStaticData:
     _borderXPercentOffset: 5
     borderYLowerLowerPercentOffset: 3

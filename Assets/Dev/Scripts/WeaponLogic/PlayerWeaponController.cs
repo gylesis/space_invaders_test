@@ -1,5 +1,6 @@
 ﻿using Dev.BotLogic;
 using Dev.ScoreLogic;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -26,8 +27,8 @@ namespace Dev.PlayerLogic
             if (isBot)
             {
                 _scoreService.AddScore(100);
-                
-                bot.gameObject.SetActive(false);
+
+                bot.ToDie.OnNext(Unit.Default);
             }
         }
 

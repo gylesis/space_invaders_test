@@ -1,4 +1,5 @@
 ﻿using Dev.PlayerLogic;
+using UniRx;
 using UnityEngine;
 
 namespace Dev.BotLogic
@@ -11,6 +12,8 @@ namespace Dev.BotLogic
 
         public BotMovementController MovementController;
 
+        public Subject<Unit> ToDie { get; } = new Subject<Unit>();
+        
         private void Awake()
         {
             MovementController = new BotMovementController(this);

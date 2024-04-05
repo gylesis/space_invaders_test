@@ -22,8 +22,10 @@ namespace Dev
         {
             _player.Health.Changed.TakeUntilDestroy(this).Subscribe((OnHealthChanged));
             _player.Health.ZeroHealth.TakeUntilDestroy(this).Subscribe((unit => OnZeroHealth()));
+            
+            OnHealthChanged(_player.Health.CurrentHealth);
         }
-
+        
         private void OnZeroHealth()
         {
             
