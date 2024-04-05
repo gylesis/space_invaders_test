@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Dev.StaticData;
+using UniRx;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -24,12 +26,16 @@ namespace Dev.BotLogic
 
         private List<Bot> _spawnedBots = new List<Bot>();
 
+        public List<Bot> SpawnedBots => _spawnedBots;
+
         public int WasSpawnedBotsAmount { get; private set; }
         public int DiedBotsAmount => WasSpawnedBotsAmount - _spawnedBots.Count;
             
         private BotFactory _botFactory;
         private GameConfig _gameConfig;
 
+        public Subject<Unit> AllBotsDied { get; } = new Subject<Unit>();
+        
         [ContextMenu(nameof(PrepareSpawnPlaces))]
         private void PrepareSpawnPlaces()
         {
@@ -69,7 +75,7 @@ namespace Dev.BotLogic
             _botFactory = botFactory;
         }
         
-        public List<Bot> SpawnEnemies()
+        public async Task SpawnBots()
         {
             foreach (var botSpawnPoint in _botSpawnPoints)
             {
@@ -81,13 +87,36 @@ namespace Dev.BotLogic
                 spawnContext.Parent = _enemiesParent;
 
                 Bot bot = _botFactory.Create(spawnContext);
+                bot.ToDie.TakeUntilDestroy(this).Subscribe((reason => OnBotDied(bot, reason)));
                 _spawnedBots.Add(bot);
+                
+                await Task.Delay(5);
             }
 
             WasSpawnedBotsAmount = _spawnedBots.Count;
-            return _spawnedBots;
         }
 
+        private void OnBotDied(Bot bot, BotDieReason dieReason)
+        {
+            UnSpawnBot(bot);
+
+            if(dieReason == BotDieReason.ByRemoving) return;
+            
+            if (DiedBotsAmount >= WasSpawnedBotsAmount)
+            {
+                AllBotsDied.OnNext(Unit.Default);                
+            }
+        }
+
+        public void UnSpawnAllBots()
+        {
+            for (var index = _spawnedBots.Count - 1; index >= 0; index--)
+            {
+                var spawnedBot = _spawnedBots[index];
+                spawnedBot.ToDie.OnNext(BotDieReason.ByRemoving);
+            }
+        }
+        
         public void UnSpawnBot(Bot bot)
         {   
             Destroy(bot.gameObject);

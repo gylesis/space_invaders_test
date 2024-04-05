@@ -17,7 +17,7 @@ namespace Dev.BotLogic
 
         public BotMovementController MovementController;
 
-        public Subject<Unit> ToDie { get; } = new Subject<Unit>();
+        public Subject<BotDieReason> ToDie { get; } = new Subject<BotDieReason>();
         
         private void Awake()
         {

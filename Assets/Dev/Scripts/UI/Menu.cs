@@ -3,7 +3,6 @@ using Dev.UI;
 using DG.Tweening;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Dev.Scripts.UI.PopUpsAndMenus
 {

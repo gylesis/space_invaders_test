@@ -16,7 +16,13 @@ namespace Dev
             
         private void Awake()
         {
+            ResetHealth();
+        }
+
+        public void ResetHealth()
+        {
             _currentHealth = _maxHealth;
+            Changed.OnNext(_currentHealth);
         }
 
         private void Start()

@@ -14,6 +14,8 @@ namespace Dev.PlayerLogic
         
         private bool _isGamePaused;
 
+        public bool IsInputDisabled { get; set; } = true;
+        
         public PlayerMovementController(Player player, InputProvider inputProvider, GameConfig gameConfig, CameraService cameraService)
         {
             _cameraService = cameraService;
@@ -30,6 +32,8 @@ namespace Dev.PlayerLogic
         public void Tick()
         {
             if(_isGamePaused) return;
+            
+            if(IsInputDisabled) return;
             
             float moveX = _inputProvider.MoveVector.x;
             float moveY = _inputProvider.MoveVector.y;

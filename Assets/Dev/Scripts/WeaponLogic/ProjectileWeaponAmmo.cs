@@ -22,6 +22,11 @@ namespace Dev.PlayerLogic
             PauseService.Instance.RegisterListener(this);
         }
 
+        private void OnDestroy()
+        {
+            PauseService.Instance.RemoveListener(this);
+        }
+
         public void Setup(ProjectileAmmoSetupContext setupContext)
         {
             _setupContext = setupContext;

@@ -26,7 +26,6 @@ namespace Dev.BotLogic
         private int _currentStepsMoved = 0;
 
         private bool _needToStepDown;
-        private bool _allowToShoot = true;
 
         private float _timer;
 
@@ -36,12 +35,48 @@ namespace Dev.BotLogic
         private BotFactory _botFactory;
         private BotsSpawner _botsSpawner;
 
-        private float _shootTimer;
         private float _moveTimer;
-            
+
+        private CompositeDisposable _compositeDisposable = new CompositeDisposable();
+        private CompositeDisposable _shootDisposable = new CompositeDisposable();
+        
         private void Awake()
         {
             _moveDirection = Vector2.left;
+            
+            PauseService.Instance.RegisterListener(this);
+        }
+
+        private void OnDestroy()
+        {
+            PauseService.Instance.RemoveListener(this);
+        }
+
+        public void OnPause(bool isGamePaused)
+        {
+            _isGamePaused = isGamePaused;
+        }
+
+        [Inject]
+        private void Construct(BotsSpawner botsSpawner)
+        {
+            _botsSpawner = botsSpawner;
+        }
+
+        public void StopControlling()
+        {
+            _shootDisposable?.Clear();
+            _compositeDisposable?.Clear();
+        }
+        
+        public void SetupBots()
+        {
+            StopControlling();
+            
+            foreach (var bot in _botsSpawner.SpawnedBots)
+            {
+                RegisterBot(bot);
+            }
             
             Observable
                 .EveryUpdate()
@@ -56,50 +91,22 @@ namespace Dev.BotLogic
                         _moveTimer = 0;
                         MoveGroup();
                     }
-                }));
+                })).AddTo(_compositeDisposable);
 
             Observable
-                .EveryUpdate()
+                .Interval(TimeSpan.FromSeconds(_shootCooldown))
                 .Where((l => _isGamePaused == false))
                 .TakeUntilDestroy(this)
                 .Subscribe((l =>
                 {
-                    _shootTimer += Time.deltaTime;
+                    TrySomeoneToShoot();
+                })).AddTo(_compositeDisposable);
 
-                    if (_shootTimer >= _shootCooldown)
-                    {
-                        _shootTimer = 0;
-                        TrySomeoneToShoot();
-                    }
-                }));
-
-            PauseService.Instance.RegisterListener(this);
-        }
-
-        public void OnPause(bool isGamePaused)
-        {
-            _isGamePaused = isGamePaused;
-        }
-
-        [Inject]
-        private void Construct(BotsSpawner botsSpawner)
-        {
-            _botsSpawner = botsSpawner;
-        }
-
-        private void Start()
-        {
-            List<Bot> bots = _botsSpawner.SpawnEnemies();
-            
-            foreach (var bot in bots)
-            {
-                RegisterBot(bot);
-            }
         }
 
         public void RegisterBot(Bot bot)
         {
-            bot.ToDie.TakeUntilDestroy(this).Subscribe((unit => OnBotToDie(bot)));
+            bot.ToDie.TakeUntilDestroy(this).Subscribe((dieReason => OnBotToDie(bot, dieReason)));
             _bots.Add(bot);
         }
 
@@ -108,26 +115,34 @@ namespace Dev.BotLogic
             _bots.Remove(bot);
         }
 
-        private void OnBotToDie(Bot bot)
+        private void OnBotToDie(Bot bot, BotDieReason dieReason)
         {
             UnRegisterBot(bot);
-            _botsSpawner.UnSpawnBot(bot);
 
-            float modifier = 1 + _moveDiffucultyCurve.Evaluate((float)_botsSpawner.DiedBotsAmount / _botsSpawner.WasSpawnedBotsAmount);
-
-            Debug.Log($"Difficulty modifier {modifier}");
-            _moveDifficultyModifier = modifier;
+            if (dieReason == BotDieReason.ByPlayer)
+            {
+                float modifier = 1 + _moveDiffucultyCurve.Evaluate((float)_botsSpawner.DiedBotsAmount / _botsSpawner.WasSpawnedBotsAmount);
+                //Debug.Log($"Difficulty modifier {modifier}");
+             
+                _moveDifficultyModifier = modifier;
+            }
         }
 
         private void TrySomeoneToShoot()
         {
-           // if (_allowToShoot == false) return;
+           int botsAmountToShoot = Random.Range(1, 4);
 
-            Bot bot = _bots[Random.Range(0, _bots.Count)];
+           for (int i = 0; i < botsAmountToShoot; i++)
+           {
+               Bot bot = _bots[Random.Range(0, _bots.Count)];
 
-            bot.WeaponController.Shoot(Vector2.down);
+               Observable.Timer(TimeSpan.FromSeconds(Random.Range(0f, 0.3f))).Subscribe((l =>
+               {
+                   bot.WeaponController.SelectWeapon(Random.Range(0, bot.WeaponController.WeaponCount));
+                   bot.WeaponController.Shoot(Vector2.down);
+               })).AddTo(_shootDisposable);
 
-            _allowToShoot = false;
+           }
         }
 
         private void MoveGroup()
